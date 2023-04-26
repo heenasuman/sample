@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ES Mecury module.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup example
+ */
+function example_schema() {
+  $schema['es_mecury_subscriptions'] = [
+    'description' => 'Used to store subscribed Visitors.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Subscription ID.',
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'description' => 'Used to store name of the Visitor',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'description' => 'Used to store email of the Visitor',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'tcpp' => [
+        'description' => 'Used to store if Visitor is accepting policies.',
+        'type' => 'int',
+        'length' => 1,
+      ],
+      'created' => [
+        'description' => 'Timestamp when the record was created.',
+        'type' => 'int',
+      ],
+      'status' => [
+        'description' => 'Used to identify if user is verified(1) or unverified(0)',
+        'type' => 'int',
+        'length' => 1,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+    'unique keys' => [
+      'uk_mail' => ['email'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function example_update_9001() {
+  $schema = \Drupal::database()->schema();
+  if ($schema->tableExists('es_mecury_subscriptions')) {
+    if (!$schema->fieldExists('es_mecury_subscriptions', 'status')) {
+      $schema->addField('es_mecury_subscriptions', 'status', [
+        'description' => 'Used to identify if user is verified(1) or unverified(0)',
+        'type' => 'int',
+        'length' => 1,
+        'default' => 0,
+      ]);
+    }
+  }
+}

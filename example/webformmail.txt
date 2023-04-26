@@ -1,0 +1,246 @@
+Webform Confirmation Email (Spanish)
+------------------------------------
+<!DOCTYPE html>
+<html>
+  <body>
+    <table style="max-width:600px;width:100%;margin:0 auto;font-family: sans-serif; color: #1c1f21;padding-top: 30px;padding-bottom: 30px;">
+      <tbody>
+        <tr>
+          <td>
+            <img src="https://api.mercury-tfs.com/sites/default/files/horizontal.png"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-size: 24px; line-height: 32.68px;font-family: sans-serif;">Hola [webform_submission:values:name],</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-size: 24px; line-height: 32.68px;">
+              Tu consulta se ha enviado correctamente. Muy pronto recibirás la información que has solicitado.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 30px;">
+            <p style="font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+              Recibe un cordial saludo de parte de todo el equipo de <a style="color:#00AD71; text-decoration: underline;" href="https://www.mercury-tfs.com/">Mercury.</a>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-top: 1px solid #00AD71;padding-top: 10px;">
+            <p style="font-size: 16px;">Enviado por <a style="color: #00AD71;text-decoration: none;" href="https://www.mercury-tfs.com/">Mercury</a> · Josefa Valcárcel, 26, 28027 Madrid (España)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://www.linkedin.com/company/mercury-tfs/"><img src="https://api.mercury-tfs.com/sites/default/files/2022-11/li.png"/></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+
+Webform Confirmation Email (English)
+------------------------------------
+<!DOCTYPE html>
+<html>
+  <body>
+    <table style="max-width:600px;width:100%;margin:0 auto;font-family: sans-serif; color: #1c1f21;padding-top: 30px;padding-bottom: 30px;">
+      <tbody>
+        <tr>
+          <td>
+            <img src="https://api.mercury-tfs.com/sites/default/files/horizontal.png"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-size: 24px; line-height: 32.68px;font-family: sans-serif;">Hello [webform_submission:values:name],</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-size: 24px; line-height: 32.68px;">
+              Your query has been sent successfully. Soon you will receive the information you have requested.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 30px;">
+            <p style="font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+              Greetings from the <a style="color:#00AD71; text-decoration: underline;" href="https://www.mercury-tfs.com/">Mercury</a> team.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-top: 1px solid #00AD71;padding-top: 10px;">
+            <p style="font-size: 16px;">Sent by <a style="color: #00AD71;text-decoration: none;" href="https://www.mercury-tfs.com/">Mercury</a> · Josefa Valcárcel, 26, 28027 Madrid (España)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://www.linkedin.com/company/mercury-tfs/"><img src="https://api.mercury-tfs.com/sites/default/files/2022-11/li.png"/></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+
+
+Aviso por correo electrónico (Spanish)
+--------------------------------------
+<!DOCTYPE html>
+<html>
+  <body>
+    <table style="max-width:600px;width:100%;margin:0 auto;font-family: sans-serif; color: #1c1f21;padding-top: 30px;padding-bottom: 30px;">
+      <tbody>
+        <tr>
+          <td>
+            <img src="https://api.mercury-tfs.com/sites/default/files/horizontal.png"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-size: 24px; line-height: 32.68px;">
+              Se ha recibido una consulta mediante el formulario de contacto de Mercury:
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 60px">
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Nombre: </strong>[webform_submission:values:name]
+              </p>
+            </div>
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Correo electrónico: </strong>[webform_submission:values:email]
+              </p>
+            </div>
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Teléfono: </strong>[webform_submission:values:telephone]
+              </p>
+            </div>
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Tipo de consulta: </strong>[webform_submission:values:type]
+              </p>
+            </div>
+            {% if data.linkedin %}
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Linkedin: </strong>[webform_submission:values:linkedin]
+              </p>
+            </div>
+            {% endif %}
+            {% if data.cv %}
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>CV: </strong>[webform_submission:values:cv]
+              </p>
+            </div>
+            {% endif %}
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Texto de la consulta: </strong>[webform_submission:values:message]
+              </p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-top: 1px solid #00AD71;padding-top: 10px;">
+            <p style="font-size: 16px;">Enviado por <a style="color: #00AD71;text-decoration: none;" href="https://www.mercury-tfs.com/">Mercury</a> · Josefa Valcárcel, 26, 28027 Madrid (España)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://www.linkedin.com/company/mercury-tfs/"><img src="https://api.mercury-tfs.com/sites/default/files/2022-11/li.png"/></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+
+Aviso por correo electrónico (English)
+--------------------------------------
+<!DOCTYPE html>
+<html>
+  <body>
+    <table style="max-width:600px;width:100%;margin:0 auto;font-family: sans-serif; color: #1c1f21;padding-top: 30px;padding-bottom: 30px;">
+      <tbody>
+        <tr>
+          <td>
+            <img src="https://api.mercury-tfs.com/sites/default/files/horizontal.png"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-size: 24px; line-height: 32.68px;">
+              An inquiry has been received via the Mercury contact form:
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 60px">
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Name: </strong>[webform_submission:values:name]
+              </p>
+            </div>
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Email: </strong>[webform_submission:values:email]
+              </p>
+            </div>
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Phone: </strong>[webform_submission:values:telephone]
+              </p>
+            </div>
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Query type: </strong>[webform_submission:values:type]
+              </p>
+            </div>
+            {% if data.linkedin %}
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Linkedin: </strong>[webform_submission:values:linkedin]
+              </p>
+            </div>
+            {% endif %}
+            {% if data.cv %}
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>CV: </strong>[webform_submission:values:cv]
+              </p>
+            </div>
+            {% endif %}
+            <div>
+              <p style="margin:0;font-size: 24px; line-height: 32.68px;font-family: sans-serif;">
+                <strong>Query text: </strong>[webform_submission:values:message]
+              </p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-top: 1px solid #00AD71;padding-top: 10px;">
+            <p style="font-size: 16px;">Sent by <a style="color: #00AD71;text-decoration: none;" href="https://www.mercury-tfs.com/">Mercury</a> · Josefa Valcárcel, 26, 28027 Madrid (Spain)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://www.linkedin.com/company/mercury-tfs/"><img src="https://api.mercury-tfs.com/sites/default/files/2022-11/li.png"/></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * @file
+ * Can be used for any purpose.
+ */
+
+use Drupal\Component\Serialization\Json;
+use Drupal\file\Entity\File;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function example_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /*
+   * Add Custom Image field to Handle Icons,
+   * Because JsonAPI module is not compatible,
+   * Menu Items Extra Module.
+   */
+
+  if ($form_id == 'menu_link_content_menu_link_content_form') {
+    $form['field_icon'] = [
+      '#type' => 'managed_file',
+      '#title' => t('Upload Icon'),
+      '#upload_location' => 'public://',
+      '#upload_validators' => [
+        'file_validate_extensions' => ['png jpg jpeg'],
+      ],
+    ];
+    $form['actions']['submit']['#submit'][] = 'example_menu_content_submit';
+  }
+}
+
+/**
+ * Implements example_menu_content_submit() callback.
+ */
+function example_menu_content_submit($form, FormStateInterface $form_state) {
+  $menu = $form_state->getFormObject()->getEntity();
+
+  $fileIcon = $form_state->getValue('field_icon');
+  $fid = reset($fileIcon);
+
+  if (!empty($fid) && $fid > 0) {
+    $file = File::load($fid);
+    $file->setPermanent();
+    $file->save();
+
+    if ($file instanceof File) {
+      $appRepo = \Drupal::service('example.repository');
+      $image = $appRepo->getFileUrlFromUri($file->getFileUri());
+      $menu->set('description', ['value' => $image]);
+      $menu->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_mail()
+ */
+function example_mail($key, &$message, $params) {
+  $langcode = $message['langcode'];
+  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+  // $message['from'] = \Drupal::config('system.site')->get('mail');
+  switch ($key) {
+    case 'newsletter_confirmation':
+      if($langcode == 'en') {
+        $message['subject'] = t('Verify Account');
+      } else {
+        $message['subject'] = t('Verificar Cuenta');
+      }
+      $content = [
+        '#theme' => 'newsletter_confirmation_' . $langcode,
+        '#data' => $params,
+      ];
+      $message['body'][] = \Drupal::service('renderer')->renderRoot($content);
+      break;
+
+    case 'newsletter_activation':
+      if($langcode == 'en') {
+        $message['subject'] = t('Account verified');
+      } else {
+        $message['subject'] = t('Cuenta verificada');
+      }
+      $content = [
+        '#theme' => 'newsletter_activation_' . $langcode,
+        '#data' => $params,
+      ];
+      $message['body'][] = \Drupal::service('renderer')->renderRoot($content);
+      break;
+
+    case 'newsletter_admin_notification':
+      if($langcode == 'en') {
+        $message['subject'] = t('Account verified');
+      } else {
+        $message['subject'] = t('Cuenta verificada');
+      }
+      $content = [
+        '#theme' => 'newsletter_admin_notification_' . $langcode,
+        '#data' => $params,
+      ];
+      $message['body'][] = \Drupal::service('renderer')->renderRoot($content);
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function example_theme($existing, $type, $theme, $path) {
+  return [
+    'newsletter_confirmation_en' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'template' => 'mail/newsletter_confirmation_en',
+    ],
+    'newsletter_confirmation_es' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'template' => 'mail/newsletter_confirmation_es',
+    ],
+    'newsletter_activation_en' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'template' => 'mail/newsletter_activation_en',
+    ],
+    'newsletter_activation_es' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'template' => 'mail/newsletter_activation_es',
+    ],
+    'newsletter_admin_notification_en' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'template' => 'mail/newsletter_admin_notification_en',
+    ],
+    'newsletter_admin_notification_es' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'template' => 'mail/newsletter_admin_notification_es',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function example_preprocess(&$variables) {
+  $variables['backUrl'] = \Drupal::request()->getSchemeAndHttpHost();
+  $variables['frontUrl'] = \Drupal::config('example.settings')->get('front_url');
+}
+
+/**
+ * Validation of recaptcha.
+ */
+function example_validate_recaptcha_v3($captcha_response) {
+  $captcha_validation_result = &drupal_static(__FUNCTION__);
+  if (!isset($captcha_validation_result)) {
+    $config = Drupal::config('recaptcha_v3.settings');
+    $client = \Drupal::httpClient();
+    $response = $client->post('https://www.google.com/recaptcha/api/siteverify?' . http_build_query([
+      'secret' => $config->get('secret_key'),
+      'response' => $captcha_response,
+    ]));
+    $result = Json::decode($response->getBody());
+    $captcha_validation_result = $result['success'];
+  }
+  return $captcha_validation_result;
+}

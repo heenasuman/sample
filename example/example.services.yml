@@ -1,0 +1,4 @@
+services:
+  example.repository:
+    class: Drupal\example\AppRepository
+    arguments: [ '@database', '@file_url_generator', '@config.factory' ]

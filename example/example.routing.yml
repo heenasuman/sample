@@ -1,0 +1,57 @@
+example.settings:
+  path: '/admin/mecury/settings'
+  defaults:
+    _form: '\Drupal\example\Form\ConfigForm'
+    _title: 'Mercury General Settings'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+example.subscriptions.list:
+  path: '/admin/subscriptions/list'
+  defaults:
+    _controller: '\Drupal\example\Controller\PageController::subscriptions'
+    _title: 'Reporte Newsletter'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+example.subscriptions.list.csv:
+  path: '/admin/subscriptions/list/csv'
+  defaults:
+    _controller: '\Drupal\example\Controller\ReportController::subscriptionsCsv'
+  requirements:
+    _permission: 'administer site configuration'
+example.contact.list:
+  path: '/admin/contact/list'
+  defaults:
+    _controller: '\Drupal\example\Controller\PageController::contact'
+    _title: 'Reporte Contáctenos'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+example.contact.list.csv:
+  path: '/admin/contact/list/csv'
+  defaults:
+    _controller: '\Drupal\example\Controller\ReportController::contactRequestsCsv'
+  requirements:
+    _permission: 'administer site configuration'
+example.json_api_articles:
+  path: '/api/{lang}/articles'
+  defaults:
+    _controller: '\Drupal\example\Controller\PageController::getArticles'
+    _title: 'Articles JSON Api'
+  methods:  [GET]
+  requirements:
+    _access: 'TRUE'
+
+example.deploy.render:
+  path: '/admin/mercury/deploy/render'
+  defaults:
+    _controller: '\Drupal\example\Controller\PageController::render'
+    _title: 'Render Requests'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

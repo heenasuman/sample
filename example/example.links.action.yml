@@ -1,0 +1,12 @@
+example.subscriptions.list.csv:
+  route_name: example.subscriptions.list.csv
+  title: 'Descargar (CSV)'
+  weight: -20
+  appears_on:
+    - example.subscriptions.list
+example.contact.list.csv:
+  route_name: example.contact.list.csv
+  title: 'Descargar (CSV)'
+  weight: -20
+  appears_on:
+    - example.contact.list

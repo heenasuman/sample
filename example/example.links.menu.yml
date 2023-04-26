@@ -1,0 +1,26 @@
+example.settings:
+  title: 'General Settings'
+  parent: system.admin_config
+  route_name: example.settings
+  weight: -99
+example.reports:
+  title: 'Mercury Report'
+  parent: system.admin_config
+  route_name: system.admin_config
+  weight: -99
+example.contact:
+  title: 'Reporte Contáctenos'
+  parent: example.reports
+  route_name: example.contact.list
+  weight: -100
+example.subscription:
+  title: 'Reporte Newsletter'
+  parent: example.reports
+  route_name: example.subscriptions.list
+  weight: -99
+example.deploy:
+  title: 'Render Deploy'
+  description: 'render on website'
+  parent: example.reports
+  route_name: example.deploy.render
+  weight: -99
